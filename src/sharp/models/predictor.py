@@ -191,6 +191,12 @@ class RGBGaussianPredictor(nn.Module):
         )
         return gaussians
 
+    def compile(self, **kwargs):
+        """Compile the model for better performance."""
+        # Apply torch.compile to the forward method
+        self.forward = torch.compile(self.forward, **kwargs)
+        return self
+
     def internal_resolution(self) -> int:
         """Internal resolution."""
         return self.monodepth_model.internal_resolution()
