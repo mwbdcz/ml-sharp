@@ -56,6 +56,9 @@ def create_monodepth_encoder(
         use_patch_overlap=use_patch_overlap,
     )
 
+    # Optionally compile the encoder for better performance
+    # encoder = encoder.compile()
+
     return encoder
 
 

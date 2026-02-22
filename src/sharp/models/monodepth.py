@@ -152,6 +152,9 @@ def create_monodepth_dpt(
 
     monodepth_model.set_grad_checkpointing(params.grad_checkpointing)
 
+    # Optionally compile the monodepth model for better performance
+    # monodepth_model = monodepth_model.compile()
+
     return monodepth_model
 
 
