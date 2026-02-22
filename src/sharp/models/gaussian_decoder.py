@@ -261,6 +261,12 @@ class GaussianDensePredictionTransformer(nn.Module):
             geometry_features=geometry_features,  # type: ignore
         )
 
+    def compile(self, **kwargs):
+        """Compile the model for better performance."""
+        # Apply torch.compile to the forward method
+        self.forward = torch.compile(self.forward, **kwargs)
+        return self
+
     @property
     def stride(self) -> int:
         """Internal stride of GaussianDensePredictionTransformer."""

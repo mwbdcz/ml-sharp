@@ -311,6 +311,12 @@ class SlidingPyramidNetwork(BaseEncoder):
 
         return output
 
+    def compile(self, **kwargs):
+        """Compile the model for better performance."""
+        # Apply torch.compile to the forward method
+        self.forward = torch.compile(self.forward, **kwargs)
+        return self
+
 
 # It seems that torch.fx.wrap can only be applied to functions, not methods.
 # Hence, split and merge were converted into functions to be marked as atomic

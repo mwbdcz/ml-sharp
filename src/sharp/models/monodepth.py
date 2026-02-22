@@ -97,6 +97,12 @@ class MonodepthDensePredictionTransformer(nn.Module):
         disparity = self.head(features)
         return disparity
 
+    def compile(self, **kwargs):
+        """Compile the model for better performance."""
+        # Apply torch.compile to the forward method
+        self.forward = torch.compile(self.forward, **kwargs)
+        return self
+
     def internal_resolution(self) -> int:
         """Return the internal image size of the network."""
         return self.encoder.internal_resolution()
